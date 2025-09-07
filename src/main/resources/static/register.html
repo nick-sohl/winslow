@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div>
+        <form id="student-form">
+            <div class="container">
+                <h1>Register</h1>
+                <p>Please fill in this form to create an account.</p>
+                <hr>
+
+                <label for="firstname"><b>First Name</b></label>
+                <input type="text" placeholder="Enter First Name" name="firstname" id="firstname" required>
+
+                <label for="lastname"><b>Last Name</b></label>
+                <input type="text" placeholder="Enter Last Name" name="lastname" id="lastname" required>
+
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="Enter Email" name="email" id="email" required>
+
+                <label for="department"><b>Department</b>
+                    <select name="department" id="department" required class="custom-select">
+                        <option value="">Select Department</option>
+                        <option value="1">Computer Science</option>
+                        <option value="2">Mechanical Engineering</option>
+                        <option value="3">Electrical Engineering</option>
+                    </select>
+                </label>
+
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" id="password" required>
+                <hr>
+
+                <button type="submit" class="registerbtn">Register</button>
+            </div>
+
+            <div class="container signin">
+                <p>Already have an account? <a href="#">Sign in</a>.</p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+<script src="script.js" defer></script>
