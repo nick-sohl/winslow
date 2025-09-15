@@ -8,8 +8,8 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = "courses")
 public class Cours {
     @Id
-    @Column(name = "course_id", nullable = false, length = 16)
-    private String courseId;
+    @Column(name = "course_id", nullable = false)
+    private int courseId;
 
     @Column(name = "title", nullable = false)
     private String title;
@@ -19,11 +19,11 @@ public class Cours {
     @JoinColumn(name = "department_id")
     private Department department;
 
-    public String getCourseId() {
+    public int getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(String courseId) {
+    public void setCourseId(int courseId) {
         this.courseId = courseId;
     }
 

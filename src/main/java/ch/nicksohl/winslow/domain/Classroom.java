@@ -7,11 +7,8 @@ import jakarta.persistence.*;
 public class Classroom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "classroom_id", nullable = false)
+    @Column(name = "room_id", nullable = false)
     private Integer id;
-
-    @Column(name = "location", nullable = false, length = 100)
-    private String location;
 
     @Column(name = "room_number", nullable = false, length = 50)
     private String roomNumber;
@@ -25,14 +22,6 @@ public class Classroom {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     public String getRoomNumber() {

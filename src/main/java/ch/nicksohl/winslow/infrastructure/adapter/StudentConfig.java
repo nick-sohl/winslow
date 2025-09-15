@@ -4,13 +4,14 @@ package ch.nicksohl.winslow.infrastructure.adapter;
 import ch.nicksohl.winslow.application.usecase.StudentService;
 
 // Framework
+import jakarta.persistence.EntityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 class StudentConfig {
     @Bean
-    StudentService studentService(StudentRepositoryAdapter studentRepositoryAdapter) {
-        return new StudentService(studentRepositoryAdapter);
+    StudentService studentService(StudentRepositoryAdapter studentRepositoryAdapter, EntityManager entityManager) {
+        return new StudentService(studentRepositoryAdapter, entityManager);
     }
 }

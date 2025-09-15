@@ -10,7 +10,7 @@ import ch.nicksohl.winslow.domain.student.Student;
 
 public interface StudentRepositoryInterface {
     List<Student> students();
-    Optional<Student> getStudent(Integer studentId);
+    Optional<Student> getStudent(int studentId);
     Student addStudent(Student student); // add or update -> GET or UPDATE
-    void deleteStudent(Long studentId);
+    void deleteStudent(int studentId);
 }

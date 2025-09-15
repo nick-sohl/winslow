@@ -28,12 +28,11 @@ public class StudentRepositoryAdapter implements StudentRepositoryInterface {
 
     @Override
     public List<Student> students() {
-        // Get all students from the repo and save them into a List
         return studentRepository.findAll();
     }
 
     @Override
-    public Optional<Student> getStudent(Integer studentId) {
+    public Optional<Student> getStudent(int studentId) {
         return studentRepository.findById(studentId);
     }
 
@@ -43,7 +42,7 @@ public class StudentRepositoryAdapter implements StudentRepositoryInterface {
     }
 
     @Override
-    public void deleteStudent(Long studentId) {
-
+    public void deleteStudent(int studentId) {
+        studentRepository.deleteById(studentId);
     }
 }
