@@ -1,0 +1,123 @@
+@startuml
+!theme plain
+left to right direction
+skinparam linetype ortho
+skinparam classAttributeIconSize 0
+
+entity addresses {
+  *id : bigint <<PK>>
+  street : varchar
+  zipcode : varchar
+  city : varchar
+}
+
+entity schools {
+  *id : bigint <<PK>>
+  name : varchar
+  address_id : bigint <<FK>>
+}
+
+entity departments {
+  *id : bigint <<PK>>
+  name : varchar
+}
+
+entity classrooms {
+  *id : bigint <<PK>>
+  room_no : int
+  capacity : int
+  school_id : bigint <<FK>>
+}
+
+entity courses {
+  *id : bigint <<PK>>
+  title : varchar
+  description : text
+  goals : text
+  department_id : bigint <<FK>>
+}
+
+entity modules {
+  *id : bigint <<PK>>
+  name : varchar
+  description : text
+  order_index : int
+  course_id : bigint <<FK>>
+}
+
+entity lesson {
+  *id : bigint <<PK>>
+  title : varchar
+  description : text
+  order_index : int
+  module_id : bigint <<FK>>
+}
+
+entity time_slots {
+  *id : bigint <<PK>>
+  day : varchar
+  start_time : time
+  end_time : time
+}
+
+entity instructors {
+  *id : bigint <<PK>>
+  firstname : varchar
+  lastname : varchar
+  email : varchar
+  password : varchar
+  department_id : bigint <<FK>>
+}
+
+entity students {
+  *id : bigint <<PK>>
+  firstname : varchar
+  lastname : varchar
+  email : varchar
+  password : varchar
+  department_id : bigint <<FK>>
+}
+
+entity sections {
+  *id : bigint <<PK>>
+  semester : varchar
+  year : int
+  classroom : bigint <<FK>>
+  course_id : bigint <<FK>>
+}
+
+entity enrollments {
+  *id : bigint <<PK>>
+  section_id : bigint <<FK>>
+  student_id : bigint <<FK>>
+  grade : int
+}
+
+entity section_instructor {
+  *section_id : bigint <<FK>>
+  *instructor_id : bigint <<FK>>
+}
+
+entity section_timeslot {
+  *section_id : bigint <<FK>>
+  *time_slot_id : bigint <<FK>>
+}
+
+' === Relationships ===
+addresses ||--o{ schools : "has"
+schools ||--o{ classrooms : "has"
+departments ||--o{ courses : "offers"
+courses ||--o{ modules : "contains"
+modules ||--o{ lesson : "contains"
+departments ||--o{ instructors : "employs"
+departments ||--o{ students : "enrolls"
+courses ||--o{ sections : "has"
+classrooms ||--o{ sections : "hosted in"
+sections ||--o{ enrollments : "has"
+students ||--o{ enrollments : "participates"
+sections ||--o{ section_instructor : "taught by"
+instructors ||--o{ section_instructor : "teaches"
+sections ||--o{ section_timeslot : "scheduled"
+time_slots ||--o{ section_timeslot : "assigned"
+
+@enduml
