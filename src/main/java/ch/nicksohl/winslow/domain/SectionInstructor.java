@@ -5,10 +5,10 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-@Table(name = "instructor_sections")
-public class InstructorSection {
+@Table(name = "section_instructor")
+public class SectionInstructor {
     @EmbeddedId
-    private InstructorSectionId id;
+    private SectionInstructorId id;
 
     @MapsId("instructorId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -22,11 +22,11 @@ public class InstructorSection {
     @JoinColumn(name = "section_id", nullable = false)
     private Section section;
 
-    public InstructorSectionId getId() {
+    public SectionInstructorId getId() {
         return id;
     }
 
-    public void setId(InstructorSectionId id) {
+    public void setId(SectionInstructorId id) {
         this.id = id;
     }
 

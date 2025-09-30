@@ -5,7 +5,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-@Table(name = "section_time_slots")
+@Table(name = "section_timeslot")
 public class SectionTimeSlot {
     @EmbeddedId
     private SectionTimeSlotId id;

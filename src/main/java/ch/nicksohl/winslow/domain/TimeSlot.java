@@ -1,5 +1,6 @@
 package ch.nicksohl.winslow.domain;
 
+import ch.nicksohl.winslow.domain.enumeration.Day;
 import jakarta.persistence.*;
 
 import java.time.LocalTime;
@@ -10,7 +11,11 @@ public class TimeSlot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "time_slot_id", nullable = false)
-    private Integer id;
+    private Integer timeSlotId;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "day", nullable = false, length = 16)
+    private Day day;
 
     @Column(name = "start_time", nullable = false)
     private LocalTime startTime;
@@ -18,15 +23,13 @@ public class TimeSlot {
     @Column(name = "end_time", nullable = false)
     private LocalTime endTime;
 
-    @Column(name = "day", nullable = false, length = 16)
-    private String day;
 
     public Integer getId() {
-        return id;
+        return timeSlotId;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.timeSlotId = id;
     }
 
     public LocalTime getStartTime() {
@@ -46,11 +49,17 @@ public class TimeSlot {
     }
 
     public String getDay() {
-        return day;
+        return day.toString();
     }
 
-    public void setDay(String day) {
+    public void setDay(Day day) {
         this.day = day;
     }
 
+    @Override
+    public String toString() {
+        return "TimeSlot{" +
+                "day=" + day +
+                '}';
+    }
 }

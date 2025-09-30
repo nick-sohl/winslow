@@ -10,12 +10,8 @@ public class Section {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "section_id", nullable = false)
-    private Integer id;
+    private Integer sectionId;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "course_id", nullable = false)
-    private Cours course;
 
     @Column(name = "semester", length = 10)
     private String semester;
@@ -25,22 +21,27 @@ public class Section {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.SET_NULL)
-    @JoinColumn(name = "classroom_id")
+    @JoinColumn(name = "classroom")
     private Classroom classroom;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "course_id", nullable = false)
+    private Course course;
+
     public Integer getId() {
-        return id;
+        return sectionId;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.sectionId = id;
     }
 
-    public Cours getCourse() {
+    public Course getCourse() {
         return course;
     }
 
-    public void setCourse(Cours course) {
+    public void setCourse(Course course) {
         this.course = course;
     }
 

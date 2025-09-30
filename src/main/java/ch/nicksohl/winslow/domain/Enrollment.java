@@ -1,6 +1,6 @@
 package ch.nicksohl.winslow.domain;
 
-import ch.nicksohl.winslow.domain.student.Student;
+import ch.nicksohl.winslow.domain.value_object.Grade;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -9,19 +9,22 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = "enrollments")
 public class Enrollment {
     @EmbeddedId
-    private EnrollmentId id;
+    private EnrollmentId id; // Value Object
 
     @MapsId("studentId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "student_id", nullable = false)
-    private Student student;
+    private Student student; // FK
 
     @MapsId("sectionId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "section_id", nullable = false)
-    private Section section;
+    private Section section; // FK
+
+    @Embedded
+    private Grade grade; // Value Object
 
     public EnrollmentId getId() {
         return id;

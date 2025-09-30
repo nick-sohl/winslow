@@ -1,6 +1,6 @@
-package ch.nicksohl.winslow.domain.student;
+package ch.nicksohl.winslow.domain;
 
-import ch.nicksohl.winslow.domain.Department;
+import ch.nicksohl.winslow.domain.value_object.Password;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
