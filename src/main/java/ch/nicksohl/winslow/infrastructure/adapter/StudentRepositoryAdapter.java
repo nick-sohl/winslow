@@ -1,10 +1,9 @@
 package ch.nicksohl.winslow.infrastructure.adapter;
 
 // Domain
-import ch.nicksohl.winslow.domain.student.Student;
+import ch.nicksohl.winslow.domain.Student;
 
 // Application
-import ch.nicksohl.winslow.application.cqrs.StudentDto;
 import ch.nicksohl.winslow.application.port.StudentRepositoryInterface;
 
 // Infrastructure
@@ -14,7 +13,6 @@ import ch.nicksohl.winslow.infrastructure.persistence.StudentRepository;
 import org.springframework.stereotype.Service;
 
 // Java SDK
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
