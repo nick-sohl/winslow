@@ -1,18 +1,20 @@
-package ch.nicksohl.winslow.application.usecase;
+package ch.nicksohl.winslow.application.service;
 
 // Application
-import ch.nicksohl.winslow.application.cqrs.CreateStudentCommand;
-import ch.nicksohl.winslow.application.cqrs.StudentDto;
+import ch.nicksohl.winslow.application.cqrs.command.StudentCommand;
+import ch.nicksohl.winslow.application.cqrs.dto.StudentDto;
 import ch.nicksohl.winslow.application.port.StudentRepositoryInterface;
 import ch.nicksohl.winslow.domain.Department;
-import ch.nicksohl.winslow.domain.student.Password;
-import ch.nicksohl.winslow.domain.student.Student;
+import ch.nicksohl.winslow.domain.value_object.Password;
+import ch.nicksohl.winslow.domain.Student;
 import jakarta.persistence.EntityManager;
 
 // Java SDK
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+// TODO : Separate CRUD operations into use cases and bundle them into Services
 
 public class StudentService {
     private final StudentRepositoryInterface studentRepository;
@@ -22,7 +24,7 @@ public class StudentService {
     The application-layer is independent from the "outside". It doesn't no anything about the infrastructure or the presentation.
     To get access to data, we need to use the Adapter, which is implementing the JpaRepository.
     To use its methods to communicate with the JpaRepo and further with the DB, we need to use DI (dependency injection),
-    to inject the Adapter from the "outside" infrastructure, into the usecase (service) inside the application-layer.
+    to inject the Adapter from the "outside" infrastructure, into the service inside the application-layer.
     For that we use a Config-File inside the infrastructure to create the Service as a "Bean" in the Spring IOC-Container.
     Inside the Service-Class, we use the Constructor (Constructor Injection) to define the StudentRepositoryInterface as an Parameter.
     In the Config-File, we use this Parameter, to inject the Adapter as an Argument.
@@ -77,7 +79,7 @@ public class StudentService {
     }
 
     // Create new Student
-    public StudentDto addStudent(CreateStudentCommand request) {
+    public StudentDto addStudent(StudentCommand request) {
         // Create new Student object
         Student student = new Student();
         // Map values from request-body with command methods to student object with its methods

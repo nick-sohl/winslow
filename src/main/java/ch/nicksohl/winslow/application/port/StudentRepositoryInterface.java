@@ -5,8 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 // Application
-import ch.nicksohl.winslow.application.cqrs.StudentDto;
-import ch.nicksohl.winslow.domain.student.Student;
+import ch.nicksohl.winslow.domain.Student;
 
 public interface StudentRepositoryInterface {
     List<Student> students();
