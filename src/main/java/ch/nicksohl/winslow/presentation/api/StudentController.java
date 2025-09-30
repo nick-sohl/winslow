@@ -1,9 +1,9 @@
 package ch.nicksohl.winslow.presentation.api;
 
 // Application
-import ch.nicksohl.winslow.application.cqrs.CreateStudentCommand;
-import ch.nicksohl.winslow.application.cqrs.StudentDto;
-import ch.nicksohl.winslow.application.usecase.StudentService;
+import ch.nicksohl.winslow.application.cqrs.command.StudentCommand;
+import ch.nicksohl.winslow.application.cqrs.dto.StudentDto;
+import ch.nicksohl.winslow.application.service.StudentService;
 
 // Framework
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +40,7 @@ class StudentController {
     @PostMapping(value = {"", "/"}, consumes = "application/json", produces = "application/json")
     @Transactional
     // The request body gets read and deserialized into an Object through an HttpMessageReader.
-    public StudentDto addStudent(@RequestBody CreateStudentCommand request) {
+    public StudentDto addStudent(@RequestBody StudentCommand request) {
         return studentService.addStudent(request);
     }
 }
