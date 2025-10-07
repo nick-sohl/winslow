@@ -1,4 +1,4 @@
-@startuml
+ @startuml
 !theme plain
 left to right direction
 skinparam linetype ortho

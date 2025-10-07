@@ -1,5 +1,7 @@
+CREATE SCHEMA IF NOT EXISTS winslow;
 -- Set the correct schema
 SET search_path TO winslow;
+ALTER DATABASE winslow SET TIMEZONE = 'Europe/Zurich';
 
 -- Addresses
 INSERT INTO addresses (street, zipcode, city)
@@ -55,24 +57,26 @@ VALUES ('MONDAY', '08:15:00', '10:00:00'),
        ('WEDNESDAY', '08:15:00', '10:00:00'),
        ('THURSDAY', '15:15:00', '17:00:00');
 
--- Instructors (passwords should be hashed in a real application)
-INSERT INTO instructors (firstname, lastname, email, password, department_id)
-VALUES ('John', 'Smith', 'john.smith@eth.ch', '89323534', 1),
-       ('Maria', 'Garcia', 'maria.garcia@uzh.ch', '89323534', 2),
-       ('Thomas', 'Mueller', 'thomas.mueller@zhaw.ch', '89323534',
-        3);
+INSERT INTO users (firstname, lastname, username, email, password, role, department_id)
+VALUES ('Anna', 'Weber', 'anna-weber_1', 'anna.weber@student.eth.ch', '$2a$12$IL0AQGFinHpIjUykYEskZOwo3vT9wzAicz29Ozi/YR3.3OglocARC', 'STUDENT', 1),
+       ('Michael', 'Schmidt', 'michael-schmidt_1', 'michael.schmidt@student.uzh.ch', '$2a$12$IL0AQGFinHpIjUykYEskZOwo3vT9wzAicz29Ozi/YR3.3OglocARC', 'STUDENT', 2),
+       ('Laura', 'Fischer', 'laura-fischer_1', 'laura.fischer@student.zhaw.ch', '$2a$12$IL0AQGFinHpIjUykYEskZOwo3vT9wzAicz29Ozi/YR3.3OglocARC', 'STUDENT', 1),
+       ('David', 'Wagner', 'david-wagner_1', 'david.wagner@student.eth.ch', '$2a$12$IL0AQGFinHpIjUykYEskZOwo3vT9wzAicz29Ozi/YR3.3OglocARC', 'STUDENT', 1),
+       ('Sophie', 'Meyer', 'sophie-meyer_1', 'sophie.meyer@student.uzh.ch', '$2a$12$IL0AQGFinHpIjUykYEskZOwo3vT9wzAicz29Ozi/YR3.3OglocARC', 'STUDENT', 2),
+       ('Lucas', 'Berger', 'lucas-berger_1', 'lucas.berger@student.zhaw.ch', '$2a$12$IL0AQGFinHpIjUykYEskZOwo3vT9wzAicz29Ozi/YR3.3OglocARC', 'STUDENT', 3),
+       ('Emma', 'Schneider', 'emma-schneider_1', 'emma.schneider@student.eth.ch', '$2a$12$IL0AQGFinHpIjUykYEskZOwo3vT9wzAicz29Ozi/YR3.3OglocARC', 'STUDENT', 4),
+       ('Noah', 'Keller', 'noah-keller_1', 'noah.keller@student.uzh.ch', '$2a$12$IL0AQGFinHpIjUykYEskZOwo3vT9wzAicz29Ozi/YR3.3OglocARC', 'STUDENT', 1),
+       ('Lisa', 'Huber', 'lisa-huber_1', 'lisa.huber@student.zhaw.ch', '$2a$12$IL0AQGFinHpIjUykYEskZOwo3vT9wzAicz29Ozi/YR3.3OglocARC', 'STUDENT', 2),
+       ('John', 'Smith', 'john-smith_1', 'john.smith@eth.ch', '$2a$12$IL0AQGFinHpIjUykYEskZOwo3vT9wzAicz29Ozi/YR3.3OglocARC', 'INSTRUCTOR', 1),
+       ('Maria', 'Garcia', 'maria-garcia_1', 'maria.garcia@uzh.ch', '$2a$12$IL0AQGFinHpIjUykYEskZOwo3vT9wzAicz29Ozi/YR3.3OglocARC', 'INSTRUCTOR', 2),
+       ('Thomas', 'Mueller', 'thomas-mueller_1', 'thomas.mueller@zhaw.ch', '$2a$12$IL0AQGFinHpIjUykYEskZOwo3vT9wzAicz29Ozi/YR3.3OglocARC', 'INSTRUCTOR', 3);
 
--- Students (passwords should be hashed in a real application)
-INSERT INTO students (firstname, lastname, email, password, department_id)
-VALUES ('Anna', 'Weber', 'anna.weber@student.eth.ch', '89323534', 1),
-       ('Michael', 'Schmidt', 'michael.schmidt@student.uzh.ch','89323534', 2),
-       ('Laura', 'Fischer', 'laura.fischer@student.zhaw.ch','89323534', 1),
-       ('David', 'Wagner', 'david.wagner@student.eth.ch','89323534', 1),
-       ('Sophie', 'Meyer', 'sophie.meyer@student.uzh.ch','89323534', 2),
-       ('Lucas', 'Berger', 'lucas.berger@student.zhaw.ch','89323534', 3),
-       ('Emma', 'Schneider', 'emma.schneider@student.eth.ch','89323534', 4),
-       ('Noah', 'Keller', 'noah.keller@student.uzh.ch', '89323534',1),
-       ('Lisa', 'Huber', 'lisa.huber@student.zhaw.ch', '89323534',2);
+INSERT INTO students (user_id)
+VALUES (1), (2), (3), (4), (5), (6), (7), (8), (9);
+
+INSERT INTO instructors (user_id)
+VALUES (10), (11), (12);
+
 
 -- Sections
 INSERT INTO sections (semester, year, classroom, course_id)

@@ -1,7 +1,7 @@
 package ch.nicksohl.winslow.infrastructure.adapter.config;
 
 import ch.nicksohl.winslow.application.service.ModuleService;
-import ch.nicksohl.winslow.application.usecase.*;
+import ch.nicksohl.winslow.application.usecase.module.*;
 import ch.nicksohl.winslow.infrastructure.adapter.ModuleRepositoryAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

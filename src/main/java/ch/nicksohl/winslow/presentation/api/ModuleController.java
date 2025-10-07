@@ -2,10 +2,8 @@ package ch.nicksohl.winslow.presentation.api;
 
 import ch.nicksohl.winslow.application.cqrs.dto.ModuleDto;
 import ch.nicksohl.winslow.application.service.ModuleService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import ch.nicksohl.winslow.application.shared.Result;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,7 +30,7 @@ public class ModuleController {
 	}
 
 	@GetMapping("/courses/{courseId}/modules/{moduleId}")
-	public ModuleDto findModuleById(@PathVariable("moduleId") Long moduleId) {
+	public Result<ModuleDto> findModuleById(@PathVariable("courseId") int courseId, @PathVariable("moduleId") Long moduleId) {
 		return moduleService.findModuleById(moduleId);
 	}
 }

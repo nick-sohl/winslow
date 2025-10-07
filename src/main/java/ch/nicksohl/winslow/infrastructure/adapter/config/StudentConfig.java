@@ -1,3 +1,4 @@
+/*
 package ch.nicksohl.winslow.infrastructure.adapter.config;
 
 // Application Use Cases
@@ -18,3 +19,4 @@ class StudentConfig {
     }
 
 }
+*/

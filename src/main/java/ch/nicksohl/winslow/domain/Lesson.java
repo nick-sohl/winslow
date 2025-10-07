@@ -2,6 +2,8 @@ package ch.nicksohl.winslow.domain;
 
 import ch.nicksohl.winslow.domain.value_object.OrderIndex;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 public class Lesson {
@@ -23,6 +25,7 @@ public class Lesson {
 	// ? Many entity instances (Lessons) can be associated with one instance of another entity (Modules)
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "module_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
 	private CourseModule courseModule;
 
 	public Integer getLessonId() {

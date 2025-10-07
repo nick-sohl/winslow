@@ -1,5 +1,7 @@
 package ch.nicksohl.winslow.domain.value_object;
 
+import ch.nicksohl.winslow.application.shared.Result;
+import ch.nicksohl.winslow.domain.enumeration.ErrorCode;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
@@ -8,16 +10,20 @@ import java.util.Objects;
 @Embeddable
 public class Password {
     @Column(name = "password", nullable = false, length = 200)
-    private long value;
+    private String value;
 
     protected Password() {}
+
     public Password(String value) {
         if (value == null || value.isBlank()) {
-            // TODO : Use result pattern
-            throw new IllegalArgumentException("The password can not be empty.");
+            Result.failure(ErrorCode.VALIDATION_ERROR, "The Password can not be empty!");
         }
         // TODO : Have a look at spring security
-        this.value = value.hashCode();
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
     }
 
     @Override

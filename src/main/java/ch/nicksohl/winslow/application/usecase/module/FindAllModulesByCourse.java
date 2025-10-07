@@ -1,4 +1,4 @@
-package ch.nicksohl.winslow.application.usecase;
+package ch.nicksohl.winslow.application.usecase.module;
 
 import ch.nicksohl.winslow.application.cqrs.dto.ModuleDto;
 import ch.nicksohl.winslow.application.mapper.ModuleMapper;

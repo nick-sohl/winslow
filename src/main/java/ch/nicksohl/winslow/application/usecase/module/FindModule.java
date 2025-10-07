@@ -1,9 +1,10 @@
-package ch.nicksohl.winslow.application.usecase;
+package ch.nicksohl.winslow.application.usecase.module;
 
 import ch.nicksohl.winslow.application.cqrs.dto.ModuleDto;
 import ch.nicksohl.winslow.application.port.ModuleRepositoryInterface;
+import ch.nicksohl.winslow.application.shared.Result;
 import ch.nicksohl.winslow.domain.CourseModule;
-import ch.nicksohl.winslow.infrastructure.adapter.ModuleRepositoryAdapter;
+import ch.nicksohl.winslow.domain.enumeration.ErrorCode;
 
 import java.util.Optional;
 
@@ -13,7 +14,7 @@ public class FindModule {
 		this.moduleRepository = moduleRepository;
 	}
 
-	public ModuleDto findModuleById(Long moduleId) {
+	public Result<ModuleDto> findModuleById(Long moduleId) {
 		Optional<CourseModule> courseModule = moduleRepository.findModuleById(moduleId);
 		ModuleDto moduleDto = null;
 		if (courseModule.isPresent()) {
@@ -25,6 +26,10 @@ public class FindModule {
 					courseModule.get().getCourse().getCourseId()
 			);
 		}
-		return moduleDto;
+        else {
+            Result.failure(ErrorCode.NOT_FOUND, "The module could not be found.");
+        }
+
+        return Result.success(moduleDto);
 	}
 }

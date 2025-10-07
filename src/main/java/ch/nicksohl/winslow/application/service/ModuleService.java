@@ -2,7 +2,7 @@ package ch.nicksohl.winslow.application.service;
 
 import ch.nicksohl.winslow.application.cqrs.dto.ModuleDto;
 import ch.nicksohl.winslow.application.shared.Result;
-import ch.nicksohl.winslow.application.usecase.*;
+import ch.nicksohl.winslow.application.usecase.module.*;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class ModuleService {
 		return findAllModulesByCourse.findAllModulesByCourse(courseId);
 	}
 
-	public ModuleDto findModuleById(Long moduleId) {
+	public Result<ModuleDto> findModuleById(Long moduleId) {
 		return findModule.findModuleById(moduleId);
 	}
 

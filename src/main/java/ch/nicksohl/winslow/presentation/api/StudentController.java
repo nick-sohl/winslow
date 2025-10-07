@@ -1,3 +1,4 @@
+/*
 package ch.nicksohl.winslow.presentation.api;
 
 // Application
@@ -44,3 +45,4 @@ class StudentController {
         return studentService.addStudent(request);
     }
 }
+*/
