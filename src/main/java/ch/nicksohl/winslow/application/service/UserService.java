@@ -4,12 +4,9 @@ import ch.nicksohl.winslow.application.cqrs.command.user.LoginUserCommand;
 import ch.nicksohl.winslow.application.cqrs.command.user.RegisterUser;
 import ch.nicksohl.winslow.application.port.UserRepositoryInterface;
 import ch.nicksohl.winslow.application.shared.Result;
-import ch.nicksohl.winslow.application.usecase.user.AuthenticateUser;
-import ch.nicksohl.winslow.application.usecase.user.CreateUser;
-import ch.nicksohl.winslow.application.usecase.user.FindAllUsers;
-import ch.nicksohl.winslow.application.usecase.user.FindUserByUsername;
+import ch.nicksohl.winslow.application.usecase.jwt.GetLoggedInUserDetails;
+import ch.nicksohl.winslow.application.usecase.user.*;
 import ch.nicksohl.winslow.domain.User;
-import org.springframework.security.authentication.AuthenticationManager;
 
 import java.util.List;
 
@@ -21,6 +18,7 @@ public class UserService {
     FindUserByUsername findUserByUsername;
     AuthenticateUser authenticateUser;
     FindAllUsers findAllUsers;
+    GetLoggedInUserDetails getLoggedInUserDetails;
 
     // Constructor
     public UserService(
@@ -28,13 +26,15 @@ public class UserService {
             CreateUser createUser,
             FindUserByUsername findUserByUsername,
             FindAllUsers findAllUsers,
-            AuthenticateUser authenticateUser
+            AuthenticateUser authenticateUser,
+            GetLoggedInUserDetails getLoggedInUserDetails
     ) {
         this.userRepoAdapter = userRepoAdapter;
         this.createUser = createUser;
         this.findUserByUsername = findUserByUsername;
         this.findAllUsers = findAllUsers;
         this.authenticateUser = authenticateUser;
+        this.getLoggedInUserDetails = getLoggedInUserDetails;
     }
 
     public Result<List<User>> findAllUsers() {

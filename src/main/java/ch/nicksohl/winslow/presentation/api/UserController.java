@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/users")
 public class UserController {
     UserService userService;
 
@@ -40,7 +39,7 @@ public class UserController {
         return userService.authenticateUser(loginUserCommand);
     }
 
-    @GetMapping("")
+    @GetMapping("api/users")
     public Result<List<UserDto>> findAllUsers() {
         Result<List<User>> result = userService.findAllUsers();
         List<User> data = result.data();

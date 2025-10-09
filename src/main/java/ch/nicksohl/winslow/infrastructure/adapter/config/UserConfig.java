@@ -2,10 +2,8 @@ package ch.nicksohl.winslow.infrastructure.adapter.config;
 
 import ch.nicksohl.winslow.application.service.DepartmentService;
 import ch.nicksohl.winslow.application.service.UserService;
-import ch.nicksohl.winslow.application.usecase.user.AuthenticateUser;
-import ch.nicksohl.winslow.application.usecase.user.CreateUser;
-import ch.nicksohl.winslow.application.usecase.user.FindAllUsers;
-import ch.nicksohl.winslow.application.usecase.user.FindUserByUsername;
+import ch.nicksohl.winslow.application.usecase.jwt.GetLoggedInUserDetails;
+import ch.nicksohl.winslow.application.usecase.user.*;
 import ch.nicksohl.winslow.infrastructure.adapter.UserRepositoryAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,9 +18,10 @@ public class UserConfig {
             CreateUser createUser,
             FindUserByUsername findUserByUsername,
             FindAllUsers findAllUsers,
-            AuthenticateUser authenticateUser
+            AuthenticateUser authenticateUser,
+            GetLoggedInUserDetails getLoggedInUserDetails
     ) {
-        return new UserService(userRepositoryAdapter, createUser, findUserByUsername, findAllUsers, authenticateUser);
+        return new UserService(userRepositoryAdapter, createUser, findUserByUsername, findAllUsers, authenticateUser, getLoggedInUserDetails);
     }
 
     @Bean
@@ -43,6 +42,11 @@ public class UserConfig {
     @Bean
     FindAllUsers findAllUsers(UserRepositoryAdapter userRepositoryAdapter) {
         return new FindAllUsers(userRepositoryAdapter);
+    }
+
+    @Bean
+    GetLoggedInUserDetails getLoggedInUsername() {
+        return new GetLoggedInUserDetails();
     }
 
 }
