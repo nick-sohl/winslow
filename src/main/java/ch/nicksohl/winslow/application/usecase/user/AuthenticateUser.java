@@ -41,6 +41,7 @@ public class AuthenticateUser {
             return Result.success(
                     new JwtBuilder.Builder()
                             .subject(loginUserCommand.username())
+                            .claims("role", loginUserCommand.role())
                             .issuedAt()
                             .expiresInSeconds(3200)
                             .signWith(secretKey)
