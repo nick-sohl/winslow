@@ -32,9 +32,10 @@ public class AuthenticateUser {
         }
 
         try {
-            // SecretKey secretKey = JwtBuilder.getKeyFromKeyGenerator("HmacSHA512", 512);
-            System.out.println("Loaded secret: " + secret);
+            // Secret String -> Bytes -> HmacSHA512 -> SecretKey object
+            // Decode String into array of bites
             byte[] decodedKey = Base64.getDecoder().decode(secret);
+            // Convert array of bites into SecretKey object, to use it for the JwtBuilder
             SecretKey secretKey = new SecretKeySpec(decodedKey, "HmacSHA512");
 
             System.out.println(Base64.getUrlEncoder().withoutPadding().encodeToString(secretKey.getEncoded()));
@@ -43,7 +44,7 @@ public class AuthenticateUser {
                             .subject(loginUserCommand.username())
                             .claims("role", loginUserCommand.role())
                             .issuedAt()
-                            .expiresInSeconds(3200)
+                            .expiresInSeconds(3200) // 1 hour
                             .signWith(secretKey)
                             .build()
             );

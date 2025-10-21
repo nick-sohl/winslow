@@ -20,7 +20,6 @@ public class JwtService {
         return validateToken.extractUsername(token);
     }
 
-    // Get Logged-in username
     public UserDetails getLoggedInUserDetails() {
         return getLoggedInUserDetails.getLoggedInUserDetails();
     }
