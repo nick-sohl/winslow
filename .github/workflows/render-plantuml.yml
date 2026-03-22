@@ -1,0 +1,86 @@
+name: Render PlantUML Diagrams
+
+on:
+  push:
+    paths:
+      - 'docs/**/*.md'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  render-diagrams:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install PlantUML dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y default-jre graphviz wget
+          wget -q -O /tmp/plantuml.jar https://github.com/plantuml/plantuml/releases/download/v1.2024.8/plantuml-1.2024.8.jar
+
+      - name: Extract and render PlantUML diagrams
+        run: |
+          mkdir -p docs/diagrams
+
+          # Extract all PlantUML blocks from Markdown files and render them
+          for md_file in docs/*.md; do
+            echo "Processing: $md_file"
+
+            # Use awk to extract plantuml code blocks
+            awk '
+              /^```plantuml/{found=1; content=""; next}
+              /^```/{
+                if(found) {
+                  # Extract diagram name from @startuml line
+                  match(content, /@startuml ([a-zA-Z0-9_]+)/, arr)
+                  if(arr[1] != "") {
+                    name = arr[1]
+                  } else {
+                    name = "diagram_" NR
+                  }
+                  filename = "docs/diagrams/" name ".puml"
+                  print content > filename
+                  close(filename)
+                  print "  Extracted: " name
+                  found=0
+                }
+                next
+              }
+              found{content = content $0 "\n"}
+            ' "$md_file"
+          done
+
+          # Render all .puml files to PNG
+          puml_count=$(find docs/diagrams -name "*.puml" 2>/dev/null | wc -l)
+          if [ "$puml_count" -gt 0 ]; then
+            echo "Rendering $puml_count diagram(s)..."
+            java -jar /tmp/plantuml.jar -tpng -o "$(pwd)/docs/diagrams" docs/diagrams/*.puml
+            echo "Rendering complete."
+
+            # Clean up .puml source files (keep only PNGs)
+            rm -f docs/diagrams/*.puml
+
+            # List generated files
+            echo "Generated diagrams:"
+            ls -la docs/diagrams/*.png 2>/dev/null || echo "  No PNG files generated."
+          else
+            echo "No PlantUML diagrams found to render."
+          fi
+
+      - name: Commit rendered diagrams
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/diagrams/*.png 2>/dev/null || true
+
+          if git diff --cached --quiet; then
+            echo "No diagram changes to commit."
+          else
+            git commit -m "chore: render PlantUML diagrams [skip ci]"
+            git push
+          fi
