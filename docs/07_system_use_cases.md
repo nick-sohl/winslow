@@ -147,4 +147,4 @@ SUC09 ..> SUCS1 : «include»
 
 ---
 
-[← Geschäftsanwendungsfälle](06_geschaeftsanwendungsfaelle.md) | [Zurück zur Übersicht](README.md) | [Weiter: Dynamische Modellierung →](08_dynamische_modellierung.md)
+[← Geschäftsanwendungsfälle](06_business_use_cases.md) | [Zurück zur Übersicht](README.md) | [Weiter: Dynamische Modellierung →](08_dynamische_modellierung.md)
